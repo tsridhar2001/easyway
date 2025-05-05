@@ -1,9 +1,46 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import ExpressTicketForm
 
-# Create your views here.
-# bookings/views.py
+@login_required
+def book_express_ticket(request):
+    if request.method == 'POST':
+        form = ExpressTicketForm(request.POST)
+        if form.is_valid():
+            express_ticket = form.save(commit=False)
+            express_ticket.user = request.user
+            express_ticket.save()
+            return redirect('express_booking_success')
+    else:
+        form = ExpressTicketForm()
+    return render(request, 'bookings/book_express.html', {'form': form})
 
-from django.http import HttpResponse
+@login_required
+def express_booking_success(request):
+    return render(request, 'bookings/express_success.html')
 
-def index(request):
-    return HttpResponse("Bookings home page (test)")
+@login_required
+def book_local_ticket(request):
+    if request.method == 'POST':
+        form = LocalTicketForm(request.POST)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            return redirect('booking_success')
+    else:
+        form = LocalTicketForm()
+    return render(request, 'bookings/book_local.html', {'form': form})
+
+@login_required
+def book_platform_ticket(request):
+    if request.method == 'POST':
+        form = PlatformTicketForm(request.POST)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            return redirect('booking_success')
+    else:
+        form = PlatformTicketForm()
+    return render(request, 'bookings/book_platform.html', {'form': form})

@@ -4,22 +4,24 @@ from django.contrib.auth.models import User
 # ✅ Express Ticket Model
 class ExpressTicket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    from_station = models.CharField(max_length=100)
-    to_station = models.CharField(max_length=100)
+    source = models.CharField(max_length=100)
+    destination = models.CharField(max_length=100)
     travel_date = models.DateField()
     passengers = models.IntegerField()
     booked_at = models.DateTimeField(auto_now_add=True)
+    train_name = models.CharField(max_length=64)
+    travel_class = models.CharField(max_length=64)
 
     def __str__(self):
         return f"{self.user.username} - Express: {self.from_station} to {self.to_station}"
 
 class LocalTicket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    line = models.CharField(max_length=100)        # e.g. "Beach–Tambaram"
-    direction = models.CharField(max_length=100)   # e.g. "Toward Tambaram"
+    line_direction = models.CharField(max_length=100)   
     travel_date = models.DateField()
     quantity = models.IntegerField()
     booked_at = models.DateTimeField(auto_now_add=True)
+    ticket_count = models.IntegerField()
 
     def __str__(self):
         return f"{self.user.username} - {self.line} ({self.direction}) x{self.quantity}"
