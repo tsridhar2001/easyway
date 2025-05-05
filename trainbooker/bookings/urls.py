@@ -8,4 +8,5 @@ urlpatterns = [
     path('success/', views.express_booking_success, name='booking_success'),
     path('local/', views.book_local_ticket, name='book_local'),
     path('platform/', views.book_platform_ticket, name='book_platform'),
+    path('history/', views.view_bookings, name='view_bookings'),
 ]

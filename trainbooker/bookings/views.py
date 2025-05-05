@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import ExpressTicketForm
+from .forms import ExpressTicketForm, LocalTicketForm, PlatformTicketForm
 
 @login_required
 def book_express_ticket(request):
@@ -44,3 +44,16 @@ def book_platform_ticket(request):
     else:
         form = PlatformTicketForm()
     return render(request, 'bookings/book_platform.html', {'form': form})
+
+@login_required
+def view_bookings(request):
+    express_tickets = ExpressTicket.objects.filter(user=request.user).order_by('-booked_at')
+    local_tickets = LocalTicket.objects.filter(user=request.user).order_by('-booked_at')
+    platform_tickets = PlatformTicket.objects.filter(user=request.user).order_by('-booked_at')
+
+    context = {
+        'express_tickets': express_tickets,
+        'local_tickets': local_tickets,
+        'platform_tickets': platform_tickets,
+    }
+    return render(request, 'bookings/view_bookings.html', context)

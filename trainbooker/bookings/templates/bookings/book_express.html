@@ -1,8 +1,10 @@
 <!-- bookings/templates/bookings/book_express.html -->
-
-<h2>Book Express Ticket</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Book Ticket</button>
-</form>
+{% extends 'layout.html' %}
+{% block content %}
+    <h2>Book Express Ticket</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Book Ticket</button>
+    </form>
+{% endblock %}

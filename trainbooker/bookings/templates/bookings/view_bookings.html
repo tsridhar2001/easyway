@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h2>My Bookings</h2>
+
+  <h3>Express Tickets</h3>
+  <ul>
+    {% for ticket in express_tickets %}
+      <li>{{ ticket.train_name }} - {{ ticket.source }} to {{ ticket.destination }} on {{ ticket.travel_date }}</li>
+    {% empty %}
+      <li>No express tickets.</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Local Tickets</h3>
+  <ul>
+    {% for ticket in local_tickets %}
+      <li>{{ ticket.line_direction }} on {{ ticket.travel_date }} x{{ ticket.ticket_count }}</li>
+    {% empty %}
+      <li>No local tickets.</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Platform Tickets</h3>
+  <ul>
+    {% for ticket in platform_tickets %}
+      <li>{{ ticket.ticket_count }} ticket(s) valid until {{ ticket.valid_until }}</li>
+    {% empty %}
+      <li>No platform tickets.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
