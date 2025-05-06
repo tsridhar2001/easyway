@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ExpressTicketForm, LocalTicketForm, PlatformTicketForm
+from .models import ExpressTicket, LocalTicket, PlatformTicket
 
 @login_required
 def book_express_ticket(request):
@@ -10,7 +11,7 @@ def book_express_ticket(request):
             express_ticket = form.save(commit=False)
             express_ticket.user = request.user
             express_ticket.save()
-            return redirect('express_booking_success')
+            return redirect('booking_success')
     else:
         form = ExpressTicketForm()
     return render(request, 'bookings/book_express.html', {'form': form})

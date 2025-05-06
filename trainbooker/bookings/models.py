@@ -13,18 +13,17 @@ class ExpressTicket(models.Model):
     travel_class = models.CharField(max_length=64)
 
     def __str__(self):
-        return f"{self.user.username} - Express: {self.from_station} to {self.to_station}"
+        return f"{self.user.username} - Express: {self.source} to {self.destination}"
 
 class LocalTicket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     line_direction = models.CharField(max_length=100)   
     travel_date = models.DateField()
-    quantity = models.IntegerField()
     booked_at = models.DateTimeField(auto_now_add=True)
     ticket_count = models.IntegerField()
 
     def __str__(self):
-        return f"{self.user.username} - {self.line} ({self.direction}) x{self.quantity}"
+        return f"{self.user.username} - ({self.line_direction}) x{self.ticket_count}"
 
 
 from datetime import timedelta
