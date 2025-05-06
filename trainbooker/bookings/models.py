@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# ✅ Express Ticket Model
 class ExpressTicket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     source = models.CharField(max_length=100)

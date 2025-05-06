@@ -1,7 +1,46 @@
-<h2>Register</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Register</button>
-</form>
-<a href="{% url 'login' %}">Already have an account? Login</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3e542269-8836-44b9-a2b7-a39844589af5/ddmc7cd-23b65440-67cf-4d34-9dd1-cfb5a27eed44.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNlNTQyMjY5LTg4MzYtNDRiOS1hMmI3LWEzOTg0NDU4OWFmNVwvZGRtYzdjZC0yM2I2NTQ0MC02N2NmLTRkMzQtOWRkMS1jZmI1YTI3ZWVkNDQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.I1w7AHohqkZanJJEtm_CsuJN3Bgx9z0XQTQP0OrIZVM") no-repeat center center / cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9); /* semi-transparent card */
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 class="text-center">Register</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success w-100 mt-2">Register</button>
+    </form>
+    <a href="{% url 'login' %}" class="d-block mt-3 text-center text-primary">Already have an account? Login</a>
+  </div>
+</body>
+</html>
+
