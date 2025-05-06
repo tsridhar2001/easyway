@@ -9,4 +9,5 @@ urlpatterns = [
     path('local/', views.book_local_ticket, name='book_local'),
     path('platform/', views.book_platform_ticket, name='book_platform'),
     path('history/', views.view_bookings, name='view_bookings'),
+    path('profile/', views.view_profile, name='view_profile')
 ]

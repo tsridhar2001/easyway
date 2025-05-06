@@ -1,12 +1,56 @@
 {% extends 'layout.html' %}
+
 {% block content %}
-<h2>Welcome, {{ user.username }}!</h2>
-<p>This is your dashboard.</p>
-<ul>
-  <li><a href="{% url 'logout' %}">Logout</a></li>
-  <li><a href="{% url 'book_express' %}">Book Express Ticket</a></li>
-  <li><a href="{% url 'book_local' %}">Book Local Ticket</a></li>
-  <li><a href="{% url 'book_platform' %}">Book Platform Ticket</a></li>
-  <li><a href="{% url 'view_bookings' %}">View Booking History</a></li>
-</ul>
+  <div class="container-content">
+    <h2 class="mb-4">Welcome, {{ user.username }}!</h2>
+    <p>This is your dashboard.</p>
+
+    <!-- Recent Bookings Section -->
+    <h3>Recent Bookings</h3>
+
+    {% if express_bookings %}
+      <h4 class="mt-4">Express Tickets</h4>
+      <ul class="list-group">
+        {% for booking in express_bookings %}
+          <li class="list-group-item">
+            <strong>{{ booking.source }} to {{ booking.destination }}</strong> 
+            <span class="text-muted">on {{ booking.travel_date }}</span><br>
+            Train: <em>{{ booking.train_name }}</em> | Class: <strong>{{ booking.travel_class }}</strong>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No recent Express bookings.</p>
+    {% endif %}
+
+    {% if local_bookings %}
+      <h4 class="mt-4">Local Tickets</h4>
+      <ul class="list-group">
+        {% for booking in local_bookings %}
+          <li class="list-group-item">
+            <strong>{{ booking.line_direction }}</strong>
+            <span class="text-muted">on {{ booking.travel_date }}</span> 
+            | Tickets: <strong>{{ booking.ticket_count }}</strong>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No recent Local bookings.</p>
+    {% endif %}
+
+    {% if platform_bookings %}
+      <h4 class="mt-4">Platform Tickets</h4>
+      <ul class="list-group">
+        {% for booking in platform_bookings %}
+          <li class="list-group-item">
+            <strong>{{ booking.station }}</strong> 
+            <span class="text-muted">({{ booking.ticket_count }} tickets)</span><br>
+            Valid until: <strong>{{ booking.valid_until }}</strong>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No recent Platform bookings.</p>
+    {% endif %}
+  </div>
 {% endblock %}

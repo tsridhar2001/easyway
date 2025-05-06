@@ -58,3 +58,7 @@ def view_bookings(request):
         'platform_tickets': platform_tickets,
     }
     return render(request, 'bookings/view_bookings.html', context)
+
+@login_required
+def view_profile(request):
+    return render(request, 'users/profile.html')
